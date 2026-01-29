@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hestia Pure Source Piggery</title>
+
+<style>
+:root{
+    --primary:#3F6F63;
+    --hover:#A8D5BA;
+    --bg:#F5F9F7;
+    --dark:#2E4A42;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:var(--bg);
+    color:#333;
+}
+
+/* ================= NAV ================= */
+nav{
+    position:sticky;
+    top:0;
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    z-index:1000;
+}
+
+.nav-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:700;
+    color:var(--primary);
+    font-size:18px;
+}
+
+.nav-buttons button{
+    background:none;
+    border:none;
+    margin-left:18px;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.nav-buttons button:hover,
+.nav-buttons button.active{
+    color:var(--hover);
+}
+
+.menu-toggle{display:none;font-size:22px;cursor:pointer;}
+
+@media(max-width:768px){
+    .menu-toggle{display:block;}
+    .nav-buttons{
+        display:none;
+        flex-direction:column;
+        background:white;
+        width:100%;
+        position:absolute;
+        top:60px;
+        left:0;
+        padding:10px 0;
+    }
+    .nav-buttons.show{display:flex;}
+    .nav-buttons button{margin:10px auto;}
+}
+
+/* ================= HERO ================= */
+#home{
+    min-height:90vh;
+    background:
+        linear-gradient(to bottom right, rgba(63,111,99,.65), rgba(168,213,186,.45)),
+        url("pigs.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* particles */
+.particle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:rgba(255,255,255,.6);
+    border-radius:50%;
+    animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+    from{transform:translateY(100vh);opacity:0;}
+    to{transform:translateY(-20vh);opacity:1;}
+}
+
+.hero{
+    background:rgba(255,255,255,.95);
+    padding:50px 40px;
+    border-radius:20px;
+    text-align:center;
+    max-width:520px;
+    box-shadow:0 20px 35px rgba(0,0,0,.25);
+    z-index:2;
+}
+
+.hero img{width:150px;margin-bottom:15px;}
+.hero h1{color:var(--primary);margin-bottom:10px;}
+.hero p{margin-bottom:25px;}
+
+.hero button{
+    background:var(--primary);
+    color:white;
+    border:none;
+    padding:14px 38px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+.hero button:hover{background:var(--hover);}
+
+/* ================= SECTIONS ================= */
+.section{
+    max-width:1000px;
+    margin:auto;
+    padding:70px 20px;
+}
+
+.box{
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+h2{color:var(--primary);margin-bottom:15px;}
+
+/* ================= SLIDER ================= */
+.slider{position:relative;overflow:hidden;border-radius:14px;}
+.slides{display:flex;transition:.6s;}
+.slides img{width:100%;flex-shrink:0;transition:.3s;}
+.slides img:hover{transform:scale(1.05);}
+
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.6);
+    color:white;
+    border:none;
+    padding:10px 14px;
+    cursor:pointer;
+    transition:.3s;
+}
+.slider-btn:hover{background:var(--hover);}
+.prev{left:10px;}
+.next{right:10px;}
+
+/* ================= FAQ ================= */
+.faq-item{margin-bottom:14px;}
+.faq-item b{color:var(--primary);}
+
+/* ================= CONTACT ================= */
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    transition:.3s;
+}
+.contact-form input:hover,
+.contact-form textarea:hover{
+    border-color:var(--hover);
+}
+
+.contact-form button{
+    background:var(--primary);
+    color:white;
+    border:none;
+    padding:12px 28px;
+    border-radius:25px;
+    cursor:pointer;
+}
+.contact-form button:hover{background:var(--hover);}
+
+.map-container{
+    margin-top:20px;
+    border-radius:14px;
+    overflow:hidden;
+}
+.map-container iframe{width:100%;height:320px;border:0;}
+
+.directions{
+    display:inline-block;
+    margin-top:15px;
+    background:var(--primary);
+    color:white;
+    padding:12px 24px;
+    border-radius:25px;
+    text-decoration:none;
+}
+.directions:hover{background:var(--hover);}
+
+/* ================= FOOTER ================= */
+footer{
+    background:var(--primary);
+    color:white;
+    text-align:center;
+    padding:18px;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="nav-inner">
+<div class="logo">Hestia Piggery</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="nav-buttons" id="navButtons">
+<button onclick="go('home')">Home</button>
+<button onclick="go('about')">About</button>
+<button onclick="go('gallery')">Gallery</button>
+<button onclick="go('testimonials')">Testimonials</button>
+<button onclick="go('faq')">FAQ</button>
+<button onclick="go('contact')">Contact</button>
+</div>
+</div>
+</nav>
+
+<section id="home">
+<div id="particles"></div>
+<div class="hero">
+<img src="logo.png">
+<h1>Hestia Pure Source Piggery</h1>
+<p>Ethical • Sustainable • Quality Swine Production</p>
+<button onclick="go('about')">Know More</button>
+</div>
+</section>
+
+<section id="about" class="section">
+<div class="box">
+<h2>About Us</h2>
+<p>Hestia Pure Source Piggery is dedicated to ethical, sustainable, and high-quality swine production in Barangay Bigao, City of Ilagan, Isabela.</p>
+</div>
+</section>
+
+<section id="gallery" class="section">
+<div class="box">
+<h2>Farm Gallery</h2>
+<div class="slider">
+<div class="slides" id="slides">
+<img src="farm1.jpg">
+<img src="farm2.jpg">
+<img src="farm3.jpg">
+</div>
+<button class="slider-btn prev" onclick="prev()">❮</button>
+<button class="slider-btn next" onclick="next()">❯</button>
+</div>
+</div>
+</section>
+
+<section id="testimonials" class="section">
+<div class="box">
+<h2>Testimonials</h2>
+<p>“Healthy pigs and reliable service.” — Juan D.</p>
+<p>“Professional and sustainable farming.” — Maria L.</p>
+</div>
+</section>
+
+<section id="faq" class="section">
+<div class="box">
+<h2>FAQ</h2>
+<div class="faq-item"><b>Do you deliver?</b><br>Yes, bulk and retail orders.</div>
+<div class="faq-item"><b>Are pigs vaccinated?</b><br>Yes, fully monitored.</div>
+<div class="faq-item"><b>Can we visit?</b><br>By appointment only.</div>
+</div>
+</section>
+
+<section id="contact" class="section">
+<div class="box">
+<h2>Contact Us</h2>
+<p>📍 Barangay Bigao, City of Ilagan, Isabela</p>
+<p>🌐 <a href="https://web.facebook.com/profile.php?id=61587085238391" target="_blank">Facebook Page</a></p>
+
+<form class="contact-form" onsubmit="return false;">
+<input placeholder="Name" required>
+<input type="email" placeholder="Email" required>
+<textarea rows="4" placeholder="Message"></textarea>
+<button>Send Message</button>
+</form>
+
+<div class="map-container">
+<iframe src="https://www.google.com/maps?q=Bigao,+City+of+Ilagan,+Isabela,+Philippines&output=embed"></iframe>
+</div>
+
+<a class="directions" target="_blank"
+href="https://www.google.com/maps/dir/?api=1&destination=Bigao,+City+of+Ilagan,+Isabela">
+Get Directions
+</a>
+</div>
+</section>
+
+<footer>© 2026 Hestia Pure Source Piggery</footer>
+
+<script>
+function toggleMenu(){
+    navButtons.classList.toggle("show");
+}
+function go(id){
+    document.getElementById(id).scrollIntoView();
+    navButtons.classList.remove("show");
+}
+
+// slider
+let i=0;
+const slides=document.getElementById("slides");
+const total=slides.children.length;
+function show(){slides.style.transform=`translateX(-${i*100}%)`;}
+function next(){i=(i+1)%total;show();}
+function prev(){i=(i-1+total)%total;show();}
+setInterval(next,4000);
+
+// particles
+const p=document.getElementById("particles");
+for(let x=0;x<35;x++){
+    const d=document.createElement("div");
+    d.className="particle";
+    d.style.left=Math.random()*100+"%";
+    d.style.animationDuration=5+Math.random()*6+"s";
+    p.appendChild(d);
+}
+</script>
+
+</body>
+</html>
